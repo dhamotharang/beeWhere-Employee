@@ -723,6 +723,7 @@ export class ClockInPage implements OnInit {
    * Will be executed when user click on select client drop down box.
    * Check client list based on geofiltering option. if enableGeofiltering is true,
    * filter client's locations based on +-0.005 latitude and longitude
+   * filter client's locations based on +-0.018 latitude and longitude
    * @param {*} enableGeofiltering
    * @memberof ClockInPage
    */
@@ -889,7 +890,7 @@ export class ClockInPage implements OnInit {
       //   this.clockedInInfo.jobType.autoclockout_filter.range / 100000
       // );
       const clocksRadius =
-        this.clockedInInfo.jobType.autoclockout_filter.range / 100000; // 500m(+-0.005), 1000m(+-0.01), 1500m(+-0.015), 2000m(+-0.02)
+        this.clockedInInfo.jobType.autoclockout_filter.range / 100000; // 500m(+-0.018), 1000m(+-0.01), 1500m(+-0.015), 2000m(+-0.02)
 
       const currLat = parseFloat(this.locWatch.lat).toFixed(3);
       const currLong = parseFloat(this.locWatch.long).toFixed(3);
