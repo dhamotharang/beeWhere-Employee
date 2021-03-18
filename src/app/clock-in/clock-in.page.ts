@@ -739,13 +739,13 @@ export class ClockInPage implements OnInit {
       this.globalData.clients = this.globalData.clients.filter((clients) => {
         return clients.LOCATION_DATA.some((clientLocation) => {
           const minLat = parseFloat(
-            (clientLocation.LATITUDE - 0.005).toString()
+            (clientLocation.LATITUDE - 0.018).toString()
           ).toFixed(3);
-          const maxLat = parseFloat(this.locWatch.lat + 0.005).toFixed(3);
+          const maxLat = parseFloat(this.locWatch.lat + 0.018).toFixed(3);
           const minLong = parseFloat(
-            (clientLocation.LONGITUDE - 0.005).toString()
+            (clientLocation.LONGITUDE - 0.018).toString()
           ).toFixed(3);
-          const maxLong = parseFloat(this.locWatch.long + 0.005).toFixed(3);
+          const maxLong = parseFloat(this.locWatch.long + 0.018).toFixed(3);
           return (
             minLat <= parseFloat(this.locWatch.lat).toFixed(3) &&
             parseFloat(this.locWatch.lat).toFixed(3) <= maxLat &&
