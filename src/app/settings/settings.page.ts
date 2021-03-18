@@ -3,6 +3,7 @@ import { GlobalFnService } from '@services/global-fn.service';
 import { APIService } from '@services/_services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 /**
  * This component for Settings page
@@ -68,7 +69,20 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   public appVersion: string = null;
+  
+  
+  public currTime: any = new Date().toISOString();
+  geoLocError: string;
+  locWatch: any;
+  countTimeoutReqLocation: number = 0;
+  locationTimerId: NodeJS.Timeout;
+  latitude: number;
+  longitude: number;
+  formatted_address: any;
 
+  public publicIp = require("public-ip");
+  public gPlatform = require("platform");
+  loginPublicIp: any;
   /**
    * Creates an instance of SettingsPage.
    * @param {APIService} stApi
@@ -76,13 +90,19 @@ export class SettingsPage implements OnInit {
    * @memberof SettingsPage
    */
   constructor(private stApi: APIService, private stFGlobal: GlobalFnService, public stAuth: AuthenticationService,
-              private platform: Platform) {}
+              private platform: Platform, private geoloc: Geolocation) {}
 
   /**
    * Initialize methods in this component
    * @memberof SettingsPage
    */
-  ngOnInit() {}
+  ngOnInit() {
+
+
+    (async () => {
+      this.loginPublicIp = await this.publicIp.v4();
+    })();
+  }
 
   /**
    * Will be executed once this view was entered
@@ -90,6 +110,8 @@ export class SettingsPage implements OnInit {
    */
   ionViewDidEnter() {
     this.loginLog = [];
+    this.countTimeoutReqLocation = 0;
+    this.getLoc();
     // this.versionCode
     this.platform.ready().then(() => {
       console.log('on device ready only');
@@ -161,4 +183,52 @@ export class SettingsPage implements OnInit {
     this.openViewMyProfile = true;
     this.myProfileData = localStorage.getItem('usr');
   }
+
+  getLoc() {
+    this.geoLocError = "";
+    this.geoloc
+      .getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0})
+      .then((resp) => {
+        console.log("resp");
+        console.log(resp);
+        this.stApi
+          .getWithHeader(
+            "/api/location/search/coordinate/" +
+              resp.coords.latitude +
+              "%2C" +
+              resp.coords.longitude
+          )
+          .subscribe(
+            (res) => {
+              this.latitude = resp.coords.latitude;
+              this.longitude = resp.coords.longitude;
+              this.formatted_address = (res as any).results[0].formatted_address;
+
+              console.log(this.locWatch);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      })
+      .catch((error) => {
+        this.geoLocError = "Error getting location. " + error.message;
+        if (this.countTimeoutReqLocation < 10) {
+          setTimeout(() => {
+            this.getLoc();
+            this.countTimeoutReqLocation++;
+          }, 2000);
+
+        }
+      });
+    // }
+    this.locationTimerId = setTimeout(() => {
+      this.getLoc();
+    }, 300000);
+    // }, 300000);
+  }
+
 }

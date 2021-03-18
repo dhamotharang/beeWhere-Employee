@@ -104,6 +104,22 @@
           <div>Version: {{appVersion}}</div>
         </div>
       </ion-item>
+      <ion-item>
+        <div style="padding-top:1em; padding-bottom:1em;">
+          <div>Location Info</div>
+          <div class="small-note" >Timestamp: {{currTime | date: 'd MMM yyyy hh:mm a'}}</div>
+          <div class="small-note" >Latitude:  {{latitude}}</div>
+          <div class="small-note">Longitude: {{longitude}}</div>
+          <div class="small-note">Address: {{formatted_address}}</div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div style="padding-top:1em; padding-bottom:1em;">
+          <div>Device Info</div>
+          <div class="small-note" >IP address: {{loginPublicIp}}</div>
+          <div class="small-note" >Platform: {{gPlatform.description}}</div>
+        </div>
+      </ion-item>
     </ion-item-group>
     
     <ion-item-group class="logout-list" *ngIf="!openLoginActivityList && !openViewMyProfile">
