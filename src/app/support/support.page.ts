@@ -48,6 +48,8 @@ export class SupportPage implements OnInit {
   private formData = new FormData();
 
   public choosenFile = "No file chosen";
+
+  public uploadErr = null;
   /**
    * Creates an instance of SupportPage.
    * @param {FormBuilder} formbuilder get methods from FormBuilder
@@ -222,6 +224,8 @@ export class SupportPage implements OnInit {
     // const fileToUpload = evt.item(0);
     // console.log(formData);
     const file = (event as any).target.files[0];
+    console.log(file);
+    this.uploadErr = (file.size > 5000000) ? "File uploaded is to big (" + Math.floor(file.size/100000) + "MB)"  : null;
     this.choosenFile = file.name;
     this.formData.append("file", file, file.name);
     console.log(evt);

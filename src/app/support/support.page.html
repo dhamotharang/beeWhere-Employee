@@ -227,11 +227,12 @@
                     <ion-label>Supporting Document</ion-label>
                     <ion-note *ngIf="choosenFile === 'No file chosen'" >
                       *required</ion-note>
+                    <ion-note *ngIf="uploadErr !== null">{{uploadErr}}</ion-note>
                   </div>
                   <ion-button fill="clear" (click)="file.click();">Add file</ion-button>
                   <input type="file" #file name="file" type="file" (change)="upload($event)">
                   <ion-text>{{choosenFile}}</ion-text>
-                  <ion-text>You can upload the following filetypes: .jpg , .jpeg , .png , .pdf</ion-text>
+                  <ion-text>Max file size is 5MB. You can upload the following filetypes: .jpg , .jpeg , .png , .pdf</ion-text>
                 </ion-item-group>
                 <ion-item-group>
                   <ion-label>Description</ion-label>
