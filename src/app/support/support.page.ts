@@ -225,7 +225,7 @@ export class SupportPage implements OnInit {
     // console.log(formData);
     const file = (event as any).target.files[0];
     console.log(file);
-    this.uploadErr = (file.size > 5000000) ? "File uploaded is to big (" + Math.floor(file.size/100000) + "MB)"  : null;
+    this.uploadErr = (file.size > 5000000) ? "File uploaded is to big (" + (file.size/1000000).toFixed(2) + "MB)"  : null;
     this.choosenFile = file.name;
     this.formData.append("file", file, file.name);
     console.log(evt);
