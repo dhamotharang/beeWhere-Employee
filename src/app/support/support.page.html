@@ -89,10 +89,16 @@
   </ion-fab-list>
 </ion-fab>
 
-<div class="clockin-button">
+<div class="clockin-button"  *ngIf="!disablesubmitbutton"  >
+    <!-- this.disablesubmitbutton = true; -->
   <!-- <ion-button shape="round" fill="outline" class="submits" routerLink="/clock-in" onsubmit="submitForm()"
     [disabled]="!mform.value.valid"> -->
     <ion-button shape="round" fill="outline" class="submits" (click)="submitForm()">
+    <ion-label>Submit</ion-label>
+  </ion-button>
+</div>
+<div class="clockin-button"  *ngIf="disablesubmitbutton"  >
+    <ion-button shape="round" fill="outline" class="submits button-disabled" (click)="submitForm()">
     <ion-label>Submit</ion-label>
   </ion-button>
 </div>

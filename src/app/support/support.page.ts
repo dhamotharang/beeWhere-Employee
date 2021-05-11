@@ -50,6 +50,7 @@ export class SupportPage implements OnInit {
   public choosenFile = "No file chosen";
 
   public uploadErr = null;
+  public disablesubmitbutton: boolean = false;
   /**
    * Creates an instance of SupportPage.
    * @param {FormBuilder} formbuilder get methods from FormBuilder
@@ -109,7 +110,8 @@ export class SupportPage implements OnInit {
    * Get the validated form then post it
    * @memberof SupportPage
    */
-  submitForm() {
+  submitForm() { 
+    this.disablesubmitbutton = true;
     console.log(this.globalData.userInfo);
     console.log(this.data);
     console.log(this.mform);
@@ -188,6 +190,8 @@ export class SupportPage implements OnInit {
       this.reqDetails.reset();
       this.choosenFile = "No file chosen";
       this.formData = new FormData();
+      this.disablesubmitbutton = false;
+
     }, (error) => {
       if (error.status === 401 && error.statusText === "Unauthorized") {
         this.sGlobal.reauthUser();
