@@ -379,17 +379,17 @@ export class ClockInPage implements OnInit {
   }
 
   successCallback(result?) {
-    console.log("1111s");
-    console.log(result); // true - enabled, false - disabled
+    // console.log("1111s");
+    // console.log(result); // true - enabled, false - disabled
     if (result) {
-      console.log("1111s spoofing detected");
+      // console.log("1111s spoofing detected");
       this.cinGlobalFn.showAlert(
         "Spoofing Detected",
         "You are using fake location application. Please stop location spoofing and try again",
         "alert-warning"
       );
     } else {
-      console.log("no spoofing detected");
+      // console.log("no spoofing detected");
     }
   }
 
@@ -399,7 +399,7 @@ export class ClockInPage implements OnInit {
   }
 
   onDeviceReady() {
-    console.log("1111");
+    // console.log("1111");
 
     const winMock = (window as any).plugins.mockgpschecker.check(
       (res) => {
@@ -461,7 +461,7 @@ export class ClockInPage implements OnInit {
    * @memberof ClockInPage
    */
   async ionViewDidEnter() {
-    console.log("ionViewDidEnter");
+    // console.log("ionViewDidEnter");
     await this.getBasicInfo();
     this.countTimeoutReqLocation = 0;
     await this.getLoc();
@@ -477,7 +477,7 @@ export class ClockInPage implements OnInit {
    * @memberof ClockInPage
    */
   ionViewDidLeave() {
-    console.log("leaveeeeee");
+    // console.log("leaveeeeee");
     clearInterval(this.locationTimerId);
     // this.watchSubscriptions.unsubscribe();
   }
@@ -618,8 +618,8 @@ export class ClockInPage implements OnInit {
       .then((resp) => {
         // this.lat = resp.coords.latitude;
         // this.long = resp.coords.longitude;
-        console.log("resp");
-        console.log(resp);
+        // console.log("resp");
+        // console.log(resp);
         this.cinApi
           .getWithHeader(
             "/api/location/search/coordinate/" +
@@ -632,10 +632,10 @@ export class ClockInPage implements OnInit {
               this.locWatch.lat = resp.coords.latitude;
               this.locWatch.long = resp.coords.longitude;
               this.locWatch.name = (res as any).results[0].formatted_address;
-              console.log("sslslslsls");
-              console.log(resp.coords.latitude);
-              console.log(resp.coords.longitude);
-              console.log((res as any).results[0].formatted_address);
+              // console.log("sslslslsls");
+              // console.log(resp.coords.latitude);
+              // console.log(resp.coords.longitude);
+              // console.log((res as any).results[0].formatted_address);
               this.allowClockin = true;
             },
             (error) => {
@@ -730,8 +730,8 @@ export class ClockInPage implements OnInit {
   getClientList(enableGeofiltering) {
     // this.getClientError = "";
     this.globalData.clients = JSON.parse(localStorage.getItem("clientList"));
-    console.log(enableGeofiltering);
-    console.log(this.selectedJobType);
+    // console.log(enableGeofiltering);
+    // console.log(this.selectedJobType);
     if (
       enableGeofiltering &&
       this.locWatch.lat !== null &&
@@ -755,8 +755,8 @@ export class ClockInPage implements OnInit {
           );
         });
       });
-      console.log(this.globalData.clients);
-      console.log(this.globalData.clients.length);
+      // console.log(this.globalData.clients);
+      // console.log(this.globalData.clients.length);
     }
   }
 
@@ -795,8 +795,8 @@ export class ClockInPage implements OnInit {
   getAllProject() {
     this.globalData.projects = [];
     this.cinApi.getWithHeader("/api/project").subscribe((projectRes) => {
-      console.log("getAllProject");
-      console.log(projectRes);
+      // console.log("getAllProject");
+      // console.log(projectRes);
 
       this.globalData.projects = projectRes;
       localStorage.setItem(
@@ -813,8 +813,8 @@ export class ClockInPage implements OnInit {
   getAllContract() {
     this.globalData.contracts = [];
     this.cinApi.getWithHeader("/api/contract").subscribe((contractRes) => {
-      console.log("getAllContract");
-      console.log(contractRes);
+      // console.log("getAllContract");
+      // console.log(contractRes);
 
       this.globalData.contracts = contractRes;
       localStorage.setItem(
@@ -831,7 +831,7 @@ export class ClockInPage implements OnInit {
    * @memberof ClockInPage
    */
   getProjectContractList(type) {
-    console.log("getProjectContractList:" + type);
+    // console.log("getProjectContractList:" + type);
     if (this.selectedClient.CLIENT_GUID !== "none") {
       if (type === "project") {
         this.globalData.projects = JSON.parse(
@@ -1022,8 +1022,6 @@ export class ClockInPage implements OnInit {
   saveClockIn(type) {
     // const temp: any = new Date(this.currTime).setHours(0, 0, 0, 0);
     const timeNow = Math.round(new Date().getTime() / 1000); // new Date().getTime() / 1000;
-    console.log(this.cinGlobal.userInfo);
-    console.log(this.cinGlobal.userInfo.userId);
     switch (type) {
       case "in":
         this.clocksForm.patchValue({
@@ -1044,16 +1042,16 @@ export class ClockInPage implements OnInit {
           userAgent: {
             description: this.cinPlatform.description,
             publicIp: this.cinPublicIPAddr,
-            deviceID: (this.cinDeviceUUID.uuid !== undefined) ? this.cinDeviceUUID.uuid : null
+            deviceID: (this.cinDeviceUUID !== undefined ) ? this.cinDeviceUUID.uuid : null
           }
         };
-        console.log("clocks in");
-        console.log(tempArr);
+        // console.log("clocks in");
+        // console.log(tempArr);
 
         this.cinApi.postWithHeader("/api/clock", tempArr).subscribe(
           (clkin) => {
-            console.log("clkin");
-            console.log(clkin);
+            // console.log("clkin");
+            // console.log(clkin);
             localStorage.setItem(
               "cin_info",
               JSON.stringify(
@@ -1070,8 +1068,8 @@ export class ClockInPage implements OnInit {
             localStorage.setItem("cid_token", clkin[0].CLOCK_LOG_GUID);
             this.globalData.clocksInfo.list = clkin;
             this.globalData.clocksInfo.latest = clkin[0].CLOCK_LOG_GUID;
-            console.log(this.globalData.clocksInfo);
-            console.log(this.checkAddNew);
+            // console.log(this.globalData.clocksInfo);
+            // console.log(this.checkAddNew);
             this.patchActivityList(clkin[0].CLOCK_LOG_GUID, this.checkAddNew);
             this.data.userInfo.clockIn.status = true;
             this.clockedInInfo = JSON.parse(localStorage.getItem("cin_info"));
@@ -1079,7 +1077,7 @@ export class ClockInPage implements OnInit {
             this.cinGlobalFn.showToast("Success Clocked In", "success");
             // this.autoclockoutCheck(); // disabled autoclockout function for release 1
 
-            console.log(this.clockedInInfo);
+            // console.log(this.clockedInInfo);
           },
           (error) => {
             console.log("clkin");
@@ -1105,18 +1103,18 @@ export class ClockInPage implements OnInit {
           userAgent: {
             description: this.cinPlatform.description,
             publicIp: this.cinPublicIPAddr,
-            deviceID: (this.cinDeviceUUID.uuid !== undefined) ? this.cinDeviceUUID.uuid : null
+            deviceID: (this.cinDeviceUUID !== undefined) ? this.cinDeviceUUID.uuid : null
           }
         };
-        console.log("clocks out");
-        console.log(coutArr);
+        // console.log("clocks out");
+        // console.log(coutArr);
         this.cinApi.patchWithHeader("/api/clock", coutArr).subscribe(
           (coutResp) => {
-            console.log("coutResp");
-            console.log(coutResp);
-            console.log(this.checkAddNew);
+            // console.log("coutResp");
+            // console.log(coutResp);
+            // console.log(this.checkAddNew);
 
-            console.log(this.clockedInInfo);
+            // console.log(this.clockedInInfo);
             this.patchActivityList(
               coutResp[0].CLOCK_LOG_GUID,
               this.clockedInInfo.activities // this.checkAddNew
