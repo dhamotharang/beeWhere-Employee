@@ -43,8 +43,9 @@ export class AppComponent {
           }
         }
       }).catch(err => {
-        localStorage.clear();
-        this.router.navigate(["/"]);
+        // console.log('app_versioncode:' + err);
+        // localStorage.clear();
+        // this.router.navigate(["/"]);
       });
     });
 
