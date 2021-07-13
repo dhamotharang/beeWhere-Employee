@@ -6,8 +6,25 @@
     <param name="android-package" value="com.tenforwardconsulting.bgloc.cordova.BackgroundGeolocationPlugin"/>
   </feature>
 
+  <feature name="LocationManager">
+    <param name="android-package" value="com.unarin.cordova.beacon.LocationManager"/>
+  </feature>
+
   <feature name="AppVersion">
     <param name="android-package" value="uk.co.whiteoctober.cordova.AppVersion"/>
+  </feature>
+
+  <feature name="BLE">
+    <param name="android-package" value="com.megster.cordova.ble.central.BLECentralPlugin"/>
+  </feature>
+
+  <feature name="File">
+    <param name="android-package" value="org.apache.cordova.file.FileUtils"/>
+    <param name="onload" value="true"/>
+  </feature>
+
+  <feature name="FileTransfer">
+    <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer"/>
   </feature>
 
   <feature name="GeofencePlugin">
@@ -16,6 +33,10 @@
 
   <feature name="Geolocation">
     <param name="android-package" value="org.apache.cordova.geolocation.Geolocation"/>
+  </feature>
+
+  <feature name="LocationManager">
+    <param name="android-package" value="com.unarin.cordova.beacon.LocationManager"/>
   </feature>
 
   <feature name="MockGpsChecker">

@@ -74,11 +74,20 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
+  {
+    path: 'beacon',
+    loadChildren: () => import('./beacon/beacon.module').then( m => m.BeaconPageModule)
+  },
+  {
+    path: 'register-ble',
+    loadChildren: () => import('./register-ble/register-ble.module').then( m => m.RegisterBlePageModule)
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true ,
+    paramsInheritanceStrategy: 'always'})
   ],
   exports: [RouterModule]
 })

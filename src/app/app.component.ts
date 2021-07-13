@@ -29,6 +29,7 @@ export class AppComponent {
       this.splashScreen.hide();
 
       this.appVersion.getVersionCode().then(value => {
+        console.log('app_versioncode:' + value);
         if (localStorage.getItem("app_versioncode") === null) {
           localStorage.setItem("app_versioncode", value.toString());
           // alert(value); to check versionCode
@@ -51,7 +52,6 @@ export class AppComponent {
     window.addEventListener('offline', () => {
       alert("Oops! You are offline now!");
     });
-
 
   }
 }

@@ -27,6 +27,7 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "enableIvy": false
   }
 }

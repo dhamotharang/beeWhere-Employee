@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+// import { IBeacon } from '@ionic-native/ibeacon/ngx';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
+    // IBeacon,
     HomePageRoutingModule
   ],
   declarations: [HomePage]

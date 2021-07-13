@@ -54,6 +54,22 @@
       </div>
     </ion-fab-button>
     <ion-fab-button>
+      <div class="footer-label icon-setting-group" routerLink="/beacon">
+        <ion-icon name="settings-outline" class="main-support icon-setting"></ion-icon>
+        <ion-label>
+          Beacon
+        </ion-label>
+      </div>
+    </ion-fab-button>
+    <ion-fab-button>
+      <div class="footer-label icon-setting-group" routerLink="/register-ble">
+        <!-- <ion-icon name="settings-outline" class="main-support icon-setting"></ion-icon> -->
+        <ion-label>
+          Register BLE
+        </ion-label>
+      </div>
+    </ion-fab-button>
+    <ion-fab-button>
       <div class="footer-label icon-setting-group" routerLink="/settings">
         <ion-icon name="settings-outline" class="main-support icon-setting"></ion-icon>
         <ion-label>
@@ -473,7 +489,7 @@
                   <ion-item-sliding>
                     <ion-item lines="none">
                       <ion-checkbox slot="start" mode="ios" disabled></ion-checkbox>
-                      <ion-input type="text" placeholder="Add task here and press Enter    " [(ngModel)]="newTask" [ngModelOptions]="{standalone: true}"
+                      <ion-input type="text" placeholder="Add task here and press Enter 2   " [(ngModel)]="newTask" [ngModelOptions]="{standalone: true}"
                         (keyup.enter)="addNewTask($event)" inputmode="text" type="text" enterkeyhint="done">
                       </ion-input>
                     </ion-item>

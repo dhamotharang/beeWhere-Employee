@@ -1,26 +1,28 @@
-import { Component } from '@angular/core';
-import { IBeacon } from '@ionic-native/ibeacon/ngx';
+import { Component, OnInit } from '@angular/core';
+import { IBeacon } from '@ionic-native/ibeacon';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-beacon',
+  templateUrl: './beacon.page.html',
+  styleUrls: ['./beacon.page.scss'],
 })
-export class HomePage {
+export class BeaconPage implements OnInit {
 
   constructor(
-    public ibeacon: IBeacon
-  ) {}
-
+    // private ibeacon: IBeacon 
+  ) { }
 
   ngOnInit() {
+    console.log('beacon console');
+
+
     // Request permission to use location on iOS
     // this.ibeacon.requestAlwaysAuthorization();
     // create a new delegate and register it with the native layer
     // let delegate = this.ibeacon.Delegate();
-    console.log('testtt beacon');
+
     // console.log(delegate);
-    // Subscribe to some of the delegate's event handlers
+    // // Subscribe to some of the delegate's event handlers
     // delegate.didRangeBeaconsInRegion()
     //   .subscribe(
     //     data => console.log('didRangeBeaconsInRegion: ', data),
@@ -46,4 +48,5 @@ export class HomePage {
     //     error => console.error('Native layer failed to begin monitoring: ', error)
     //   );
   }
+
 }

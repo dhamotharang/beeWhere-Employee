@@ -19,6 +19,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { Device } from '@ionic-native/device';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { IBeacon } from '@ionic-native/ibeacon/ngx';
+// import { IBeacon } from '@ionic-native/ibeacon';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +45,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
     SplashScreen,
     GlobalService,
     Geolocation,
+    IBeacon,
     AppVersion,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],

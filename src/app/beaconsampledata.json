@@ -1,0 +1,38 @@
+{
+    "unregisteredList" : [
+        {
+            "identifer": "bluetooth 1",
+            "uuid": "2312023-31231", 
+            "major": 323,
+            "minor": 23
+        },
+        {
+            "identifer": "bluetooth 2",
+            "uuid": "2312023-232", 
+            "major": 324,
+            "minor": 3232
+        },
+        {
+            "identifer": "bluetooth 3",
+            "uuid": "2312023-3232", 
+            "major": 533,
+            "minor": 23
+        }
+    ],
+    "registeredList": [
+        {
+            "name": "receptionist beacon 1",
+            "identifer": "bluetooth 5",
+            "uuid": "2312023-rere", 
+            "major": 34323,
+            "minor": 233
+        },
+        {
+            "name": "pantry beacon 2",
+            "identifer": "bluetooth 6",
+            "uuid": "2312023-4342", 
+            "major": 3223,
+            "minor": 323
+        }
+    ]
+}
