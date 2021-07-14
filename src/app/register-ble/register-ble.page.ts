@@ -41,29 +41,37 @@ export class RegisterBlePage implements OnInit {
     console.log(delegate);
 
     // Subscribe to some of the delegate's event handlers
-    // delegate.didRangeBeaconsInRegion()
-    //   .subscribe(
-    //     data => console.log('didRangeBeaconsInRegion: ', data),
-    //     error => console.error()
-    //   );
-    // delegate.didStartMonitoringForRegion()
-    //   .subscribe(
-    //     data => console.log('didStartMonitoringForRegion: ', data),
-    //     error => console.error()
-    //   );
-    // delegate.didEnterRegion()
-    //   .subscribe(
-    //     data => {
-    //       console.log('didEnterRegion: ', data);
-    //     }
-    //   );
+    delegate.didRangeBeaconsInRegion()
+      .subscribe(
+        data => console.log('didRangeBeaconsInRegion: ', JSON.stringify(data)),
+        error => console.error()
+      );
+    delegate.didStartMonitoringForRegion()
+      .subscribe(
+        data => console.log('didStartMonitoringForRegion: ', JSON.stringify(data)),
+        error => console.error()
+      );
+    delegate.didEnterRegion()
+      .subscribe(
+        data => {
+          console.log('didEnterRegion: ', JSON.stringify(data));
+        }
+      );
 
 
-    let beaconRegion = this.createBeacon();
+    // let beaconRegion = this.createBeacon();
 
+    var uuid = '00000000-0000-0000-0000-000000000000'; // mandatory
+    var identifier = 'beaconAtTheMacBooks'; // mandatory
+    var minor = 1000; // optional, defaults to wildcard if left empty
+    var major = 5; // optional, defaults to wildcard if left empty
+    
+    let beaconRegion = this.ibeacon.BeaconRegion(identifier,uuid,major,minor)
     this.ibeacon.startMonitoringForRegion(beaconRegion)
       .then(
-        () => console.log('Native layer received the request to monitoring'),
+        (data) => {
+          console.log('Native layer received the request to monitoring, ', JSON.stringify(data));
+        },
         error => console.error('Native layer failed to begin monitoring: ', error)
       );
   }

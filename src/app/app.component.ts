@@ -44,8 +44,8 @@ export class AppComponent {
           }
         }
       }).catch(err => {
-        localStorage.clear();
-        this.router.navigate(["/"]);
+        // localStorage.clear();
+        // this.router.navigate(["/"]);
       });
     });
 

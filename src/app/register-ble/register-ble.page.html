@@ -95,7 +95,7 @@
             <li>{{regList.name}}</li>
           </div>
         </ol> -->
-        <ion-note>Slide right to delete registered beacon</ion-note>
+        <ion-note>Slide left to delete registered beacon</ion-note>
         <ion-item-sliding *ngFor="let regList of beaconData.registeredList; let i = index;">
           <ion-item class="slide-item" lines="none">
             <li>{{regList.name}}</li>
@@ -114,7 +114,7 @@
     <ion-title>Register Beacon Device</ion-title>
     <ion-card>
       <ion-card-content>
-
+        <div>{{beaconScope | json}}</div>
         <form [formGroup]="regform">
           <ion-item-group>
           <ion-label>Device List:</ion-label>
