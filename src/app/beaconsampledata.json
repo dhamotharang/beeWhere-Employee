@@ -1,31 +1,21 @@
 {
     "unregisteredList" : [
         {
-            "identifer": "bluetooth 1",
-            "uuid": "2312023-31231", 
-            "major": 323,
-            "minor": 23
-        },
-        {
-            "identifer": "bluetooth 2",
-            "uuid": "2312023-232", 
-            "major": 324,
-            "minor": 3232
-        },
-        {
-            "identifer": "bluetooth 3",
-            "uuid": "2312023-3232", 
-            "major": 533,
-            "minor": 23
+            "identifer": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825",
+            "uuid": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825", 
+            "major": 10035,
+            "minor": 56498,
+            "proximity": "ProximityNear",
+            "rssi": "-56"
         }
     ],
     "registeredList": [
         {
             "name": "receptionist beacon 1",
             "identifer": "bluetooth 5",
-            "uuid": "2312023-rere", 
-            "major": 34323,
-            "minor": 233
+            "uuid": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825", 
+            "major": 10035,
+            "minor": 56498
         },
         {
             "name": "pantry beacon 2",
@@ -33,6 +23,26 @@
             "uuid": "2312023-4342", 
             "major": 3223,
             "minor": 323
+        }
+    ],
+    "clockreport": [
+        {
+            "date": "2021-07-14",
+            "duration": 0,
+            "inTime": "Wed Jul 14 2021 05:23:01 GMT+0800 (Malaysia Time)",
+            "outTime": "Wed Jul 14 2021 05:23:04 GMT+0800 (Malaysia Time)"
+        }
+    ],
+    "clockHistory": [
+        {
+            "datetime": "07/14/2021, 11:49:36",
+            "name": "receptionist beacon 1",
+            "note": "In"
+        },
+        {
+            "datetime": "07/14/2021, 17:32:21",
+            "name": "receptionist beacon 1",
+            "note": "Out"
         }
     ]
 }

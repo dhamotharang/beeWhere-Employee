@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBeacon } from '@ionic-native/ibeacon';
+// import { IBeacon } from '@ionic-native/ibeacon';
 
 @Component({
   selector: 'app-beacon',
@@ -8,6 +8,7 @@ import { IBeacon } from '@ionic-native/ibeacon';
 })
 export class BeaconPage implements OnInit {
 
+  public beaconData = require("../beaconsampledata.json");
   constructor(
     // private ibeacon: IBeacon 
   ) { }
@@ -49,4 +50,9 @@ export class BeaconPage implements OnInit {
     //   );
   }
 
+  get sortData() {
+    return this.beaconData.clockHistory.sort((a, b) => {
+      return <any>new Date(b.datetime) - <any>new Date(a.datetime);
+    });
+  }
 }

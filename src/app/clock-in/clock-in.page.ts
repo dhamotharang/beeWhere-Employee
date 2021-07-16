@@ -16,6 +16,7 @@ import {
 } from '@ionic-native/background-geolocation/ngx';
 import { Platform } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
+import { IBeacon } from '@ionic-native/ibeacon/ngx';
 
 const { Device } = Plugins;
 // import { Refresher } from "@ionic/angular";
@@ -280,6 +281,7 @@ export class ClockInPage implements OnInit {
    */
   public jobSel: any;
 
+  public beaconData = require("../beaconsampledata.json");
 
   /**
    * Creates an instance of ClockInPage.
@@ -304,6 +306,8 @@ export class ClockInPage implements OnInit {
     private cinAuthenticationService: AuthenticationService,
     private cinApi: APIService,
     public cinGlobal: GlobalService,
+    // public ibeacon: IBeacon,
+    // public cplatform: Platform
     // private cinBackgroundGeolocation: BackgroundGeolocation,
     // private cinPlatform: Platform
   ) {
@@ -400,7 +404,7 @@ export class ClockInPage implements OnInit {
 
   onDeviceReady() {
     console.log("1111");
-
+    // this.createBeacon();
     const winMock = (window as any).plugins.mockgpschecker.check(
       (res) => {
         console.log("1111ismovk");
@@ -1076,6 +1080,13 @@ export class ClockInPage implements OnInit {
             this.clockedInInfo = JSON.parse(localStorage.getItem("cin_info"));
             this.cinGlobal.addLoginActivity("Clock in");
             this.cinGlobalFn.showToast("Success Clocked In", "success");
+            this.beaconData.clockHistory.push({
+              
+              datetime: new Date().toLocaleString(),
+              name: "receptionist beacon 1",
+              note: "In"
+            });
+            console.log('this.beaconData.clockHistory in: ', this.beaconData.clockHistory);
             // this.autoclockoutCheck(); // disabled autoclockout function for release 1
 
             console.log(this.clockedInInfo);
@@ -1134,6 +1145,13 @@ export class ClockInPage implements OnInit {
             this.checkAddNew = [];
             this.clockedInInfo.activities = [];
             this.cinGlobalFn.showToast("Success Clocked Out", "success");
+            this.beaconData.clockHistory.push({
+              datetime: new Date().toLocaleString(),
+              name: "receptionist beacon 1",
+              note: "Out"
+            });
+            console.log('this.beaconData.clockHistory out: ', this.beaconData.clockHistory);
+
             // this.clockedInInfo = [];
             // clearInterval(this.autoClockoutLocationTimerId); disable autoclockout function for release 1
           },
@@ -1216,4 +1234,57 @@ export class ClockInPage implements OnInit {
     }, 2000);
     // this.refresherRef.complete();
   }
+
+
+  // createBeacon() {
+  //   this.ibeacon.requestAlwaysAuthorization();
+    
+  //   let delegate = this.ibeacon.Delegate();
+  //   console.log('createBeacon');
+  //   console.log(this.beaconData.registeredList);
+  //   this.beaconData.registeredList.forEach((beacon) => {
+  //     console.log(beacon.uuid);
+  //     console.log(beacon.major);
+  //     console.log(beacon.minor);
+      
+  //     delegate.didRangeBeaconsInRegion()
+  //     .subscribe(
+  //       data => {          
+  //         console.log('didRangeBeaconsInRegion: ', JSON.stringify(data));
+  //         if (data.beacons.length > 0) {
+  //           data.beacons.forEach(beacon => {
+  //             console.log('sdssdsdfafd;;');
+  //             console.log(beacon.uuid);
+  //             console.log(beacon.major);
+  //             console.log(beacon.minor);
+  //             console.log(beacon.proximity);
+  //             console.log(beacon.rssi);
+  //           });
+  //         } 
+
+  //       },
+  //       error => {
+  //         console.log('dsdsd2');
+  //         console.error('error didRangeBeaconsInRegion: ', JSON.stringify(error));
+  //     }
+  //     );
+      
+  //     let beaconRegion = this.ibeacon.BeaconRegion(beacon.identifier,beacon.uuid, beacon.major, beacon.minor, true);
+  //     this.ibeacon.startRangingBeaconsInRegion(beaconRegion).then((value) => {
+  //       console.log('startRangingBeaconsInRegion: ', JSON.stringify(value));
+  //     });
+
+  //     this.ibeacon.startMonitoringForRegion(beaconRegion)
+  //     .then(
+  //       (data) => {
+  //         console.log('Native layer received the request to monitoring, ', JSON.stringify(data));
+  //         console.log(beaconRegion);
+  //       },
+  //       error => console.error('Native layer failed to begin monitoring: ', error)
+  //     );
+    
+  //   });
+
+
+  // }
 }

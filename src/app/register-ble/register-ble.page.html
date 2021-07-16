@@ -54,18 +54,19 @@
       </div>
     </ion-fab-button>
     <ion-fab-button>
-      <div class="footer-label icon-setting-group" routerLink="/beacon">
-        <ion-icon name="settings-outline" class="main-support icon-setting"></ion-icon>
+      <div class="footer-label icon-setting-group" style="max-width: 40px;white-space: pre-wrap;display: flex; place-content: center;"  routerLink="/beacon">
+        <!-- <ion-icon name="settings-outline" class="main-support icon-setting"></ion-icon> -->
         <ion-label>
-          Beacon
+          Beacon History
         </ion-label>
       </div>
     </ion-fab-button>
     <ion-fab-button>
-      <div class="footer-label icon-setting-group" routerLink="/register-ble">
-        <!-- <ion-icon name="settings-outline" class="main-support icon-setting"></ion-icon> -->
+      <div class="footer-label icon-setting-group"
+        style="max-width: 40px;white-space: pre-wrap;display: flex; place-content: center;" routerLink="/register-ble">
+          <!-- <ion-icon name="settings-outline" class="main-support icon-setting"></ion-icon> -->
         <ion-label>
-          Register BLE
+          Beacon Config
         </ion-label>
       </div>
     </ion-fab-button>
@@ -79,13 +80,22 @@
     </ion-fab-button>
   </ion-fab-list>
 </ion-fab>
+
+
 <div class="clockin-button clockin" >
   <ion-button shape="round" fill="outline" class="submits" (click)="registerNewDevice()">
     <ion-label>Submit</ion-label>
   </ion-button>
 </div>
 <script src="cordova.js"></script>
-<ion-content>
+<ion-content  class="contents">
+
+  <ion-img class="bg-img-others" src="../../assets/basic/background-default.png"></ion-img>
+  <div class="content">
+    <ion-item-group class="header">
+      <ion-label>beeWhere</ion-label>
+    </ion-item-group>
+  </div>
   <div class="registered-list">
     <ion-title>Registered Bluetooth Device</ion-title>
     <ion-card class="card-reg-list">
@@ -96,16 +106,32 @@
           </div>
         </ol> -->
         <ion-note>Slide left to delete registered beacon</ion-note>
-        <ion-item-sliding *ngFor="let regList of beaconData.registeredList; let i = index;">
-          <ion-item class="slide-item" lines="none">
-            <li>{{regList.name}}</li>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item-option (click)="onDeleteRegisteredBeacon(beaconData.registeredList, regList, i)">
-              <ion-img class="trash-style" src="../../assets/basic/trash-can.png"></ion-img>
-            </ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
+        <ng-container *ngIf="beaconData.registeredList.length > 0; else noRecordList">
+          <ion-item-sliding *ngFor="let regList of beaconData.registeredList; let i = index;">
+            <ion-item class="slide-item" lines="none">
+              <li
+                style="padding-left: 15px; display: flex;flex-flow: column;border-bottom: 1px solid var(--ion-color-text);padding-bottom: 10px;padding-top: 10px;min-width: 300px;">
+                <div style="font-size: var(--ion-text-15); color: var(--ion-color-text-header);">{{regList.name}}</div>
+                <div style="font-size: var(--ion-text-13);color: var(--ion-color-text);">UUID: {{regList.uuid}}</div>
+                <div style="display:flex; font-size: var(--ion-text-13); color: var(--ion-color-text);">
+                  <div style="flex:1;">Major: {{regList.major}}</div>
+                  <div style="flex:1;">Minor: {{regList.major}}</div>
+                </div>
+              </li>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option (click)="onDeleteRegisteredBeacon(beaconData.registeredList, regList, i)">
+                <ion-img class="trash-style" src="../../assets/basic/trash-can.png"></ion-img>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ng-container>
+        <ng-template #noRecordList>
+          <div class="no-record">
+            No registered beacon 
+          </div>
+        </ng-template>
+        
       </ion-card-content>
     </ion-card>
 
@@ -118,14 +144,32 @@
         <form [formGroup]="regform">
           <ion-item-group>
           <ion-label>Device List:</ion-label>
-            <!-- <ion-item> -->
-                <!-- <ion-label>Device List:</ion-label> -->
                 <ion-select placeholder="Select availabel device" formControlName="device">
-                  <ion-select-option value="ibeacon1">ibeacon 1</ion-select-option>
-                  <ion-select-option value="ibeacon2">ibeacon 2</ion-select-option>
-                  <ion-select-option value="ibeacon3">ibeacon 3</ion-select-option>
+
+                  <ng-container *ngIf="beaconData.unregisteredList > 0; else nodataunregisteredbeacon">
+                    <ion-select-option *ngFor="let beaconList of beaconData.unregisteredList" [value]="beaconList">
+                      <div>
+                        <div style="font-size: var(--ion-text-15); color: var(--ion-color-text);">
+                          UUID: {{beaconList.uuid}}
+                        </div>
+                        <div style="display:flex; font-size: var(--ion-text-13); color: var(--ion-color-text);">
+                          <div style="flex: 1;">Major: {{beaconList.major}}</div>
+                          <div style="flex: 1;">Minor: {{beaconList.minor}}</div>
+                        </div>
+                        <div style="display:flex; font-size: var(--ion-text-13); color: var(--ion-color-text);">
+                          <div style="flex: 1;">RSSI: {{beaconList.rssi}}</div>
+                          <div style="flex: 1;">Proximity: {{beaconList.proximity}}</div>
+                        </div>
+                      </div>
+                    </ion-select-option>
+                  </ng-container>
+                  <ng-template #nodataunregisteredbeacon>
+                    <div class="no-record">
+                      <ion-select-option disabled>Beacon not found
+                      </ion-select-option>
+                    </div>
+                  </ng-template>
                 </ion-select>
-            <!-- </ion-item> -->
           </ion-item-group> 
           <ion-item-group>
             <ion-label>Name:</ion-label>

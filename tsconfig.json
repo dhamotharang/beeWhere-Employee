@@ -28,6 +28,6 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "skipLibCheck": true,
-    "enableIvy": false
+    // "enableIvy": false
   }
 }

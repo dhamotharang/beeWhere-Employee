@@ -193,10 +193,12 @@ export class ReportPage implements OnInit {
           ? (this.dataAttendance = resp)
           : (this.dataActivtiy = resp);
 
+        console.log(resp);
         if (this.searchForm.get("duration").value === 'year') {
           this.countPrevReportEmpty = ((resp as any).length < 1 && (this.countClickPrevButton > this.countPrevValueClickPrevButton))
             ? this.countPrevReportEmpty + 1 : this.countPrevReportEmpty - 1;
         }
+
       }, (error) => {
         if (error.status === 401 && error.statusText === "Unauthorized") {
           this.rGlobal.reauthUser();
